@@ -1,0 +1,24 @@
+# New and Noteworthy: 0.15.0
+
+## Stability in production
+
+This is primarily a bug fix release with a few minor improvements.
+
+## Improvements in the php connector
+
+A number of bug fixes and improvements have been made to the php connector 
+framework, including a new way to post new widgets to wookie via the connector.
+(similar to how the java connector already does the same)
+
+## Fixes to the simple chat widget for mobile users
+
+Improvements to the simple chat widget for mobile users.
+SimpleChat did not use a viewport tag, so scaled poorly on mobile. 
+Also, the input field did not work when using a virtual keyboard on Opera Mobile. 
+
+## Widget instances have a more configurable method for setting height and width
+
+When widget instances were requested, the API automatically filled in a default 
+height and width value for the instance in cases where no size is specified in 
+the widget itself. This is now configurable from within the widgetserver.properties 
+file.

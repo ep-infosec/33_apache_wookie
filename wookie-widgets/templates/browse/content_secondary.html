@@ -1,0 +1,54 @@
+<%
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the 'License'); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an 'AS IS' BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+%>
+<div id="searchPanel" data-role="collapsible" data-theme="c"
+     data-content-theme="c">
+  <h2>Search</h2>
+
+  <form
+     action="javascript:${widget.shortname}_browse_controller.submitSearchForm()"
+     method="get">
+	<div data-role="fieldcontain">
+	  <label for="searchString">Search:</label> <input type="text"
+							   name="searchString" id="searchString" value=""
+							   placeholder="Search terms..." />
+	</div>
+
+	<div id="search-sort" data-role="fieldcontain">
+	  <label for="sort">Sort:</label> 
+	  <select name="sort" id="sort" data-native-menu="false"> creation time (created), update time (updated), title (title) and name (name) 
+	    <option value="updated">Updated</option>
+	    <option value="created">Created</option>
+	    <option value="title">Title</option>
+	    <option value="name">Name</option>
+	  </select>
+	</div>
+
+    <div id="search-sort-order" data-role="fieldcontain">
+      <fieldset data-role="controlgroup" data-type="horizontal">
+	<legend>Sort order</legend>
+	<input type="radio" name="sortOrder" id="reverseOrder" value="reverse" checked="checked" />
+	<label for="reverseOrder">Reverse</label>
+	
+	<input type="radio" name="sortOrder" id="forwardOrder" value="forward"  />
+	<label for="forwardOrder">Forward</label>
+      </fieldset>
+    </div>
+
+    <input type="submit" value="Search" />
+  </form>
+
+</div>

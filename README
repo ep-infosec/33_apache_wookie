@@ -1,0 +1,82 @@
+Welcome to Apache Wookie
+=========================
+Apache Wookie is a Java server application that allows you to upload and deploy 
+widgets for your applications; widgets can not only include all the usual kinds 
+of mini-applications, badges, and gadgets, but also fully-collaborative applications 
+such as chats, quizzes, and games. 
+
+Wookie is based on the W3C Widgets specification, but widgets can also be included 
+that use extended APIs such as Google Wave Gadgets and OpenSocial. 
+
+Administrators can upload Widgets packaged according to the W3C Widgets specification,
+and makes these available to applications using a REST API. Applications typically have 
+a plugin that implements this REST API, and enables users to pick widgets from a gallery 
+of those available to add to their pages.
+ 
+There is a Connector Framework included in Wookie for many different programming 
+languages that simplifies the process of writing plugins.
+
+Crypto Notice
+==============
+
+This distribution includes cryptographic software.  The country in
+which you currently reside may have restrictions on the import,
+possession, use, and/or re-export to another country, of
+encryption software.  BEFORE using any encryption software, please
+check your country's laws, regulations and policies concerning the
+import, possession, or use, and re-export of encryption software, to
+see if this is permitted.  See <http://www.wassenaar.org/> for more
+information.
+
+The U.S. Government Department of Commerce, Bureau of Industry and
+Security (BIS), has classified this software as Export Commodity
+Control Number (ECCN) 5D002.C.1, which includes information security
+software using or performing cryptographic functions with asymmetric
+algorithms.  The form and manner of this Apache Software Foundation
+distribution makes it eligible for export under the License Exception
+ENC Technology Software Unrestricted (TSU) exception (see the BIS
+Export Administration Regulations, Section 740.13) for both object
+code and source code.
+
+The following provides more details on the included cryptographic
+software:
+
+   Apache Santuario : http://santuario.apache.org/
+
+Getting Started
+===============
+For a source distribution, please read BUILDING for 
+instructions on building Apache Wookie. 
+
+Apache Wookie is made available in a standalone binary distribution,
+which means that once you download it, you should be able to run wookie
+'out of the box' without having to download and configure any other components
+	* Please read STANDALONE_BUILD_NOTES for this (Available if you have the standalone build only)
+	
+Additionally a WAR archive binary distribution is also made available for Wookie. 
+This is designed for users who wish to use/integrate Wookie into their existing server 
+environment - an existing Tomcat instance for example.
+	* Please read WAR_BUILD_NOTES for this (Available If you have the WAR build only)
+	
+You may also want to refer to RELEASE_NOTES for the list of changes in this release; this
+also contains information about any known issues.
+
+Questions? Need Help?
+=====================
+If you have questions about Wookie, please check the FAQ 
+(see http://wookie.apache.org/docs/faq.html) to see if someone has already 
+posted an answer to your question. Failing that, you can post a message to either the 
+wookie-dev or wookie-user mailing list; to subscribe to a mailing list, send an email 
+with the subject "subscribe" to "dev-subscribe@wookie.apache.org" or 
+"user-subscribe@wookie.apache.org"
+
+More information on Wookie
+===========================
+We welcome contributions, and encourage you to get involved in the Wookie
+community. If you'd like to learn more about how you can contribute, please
+see: http://wookie.apache.org
+
+Thank you for using Wookie
+
+The Apache Wookie Team
+http://wookie.apache.org

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+/*
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+
+<html>
+	<head>
+		<title>Apache Wookie 2.0.0</title>
+		<script src="jquery.min.js"></script>
+		<script src="wookie-connector.js"></script>
+		<script src="wookie.js"></script>
+		<script src="hmac-sha256.js"></script>
+		<script src="enc-base64-min.js"></script>
+		
+        <link rel="stylesheet" href="wookie.css"></link>
+        <style>
+            #preview{
+                width: 100%;
+                height: 500px;
+            }
+            .preview{
+                width: 48%;
+                margin: 1%;
+                float:left;
+            }
+            #navigation{
+                height: 600px;
+                overflow-y: scroll;
+            }
+            
+		
+		
+		</style>
+	</head>
+	
+	<body>
+
+        <!-- Title area -->
+        <div id="banner">
+            <img alt="Apache Wookie" src="logo.png">
+            <h1 class="title">Apache Wookie 0.15.0</h1>
+        </div>
+
+        
+        <!-- Scrolling list of widgets -->
+        <div id="navigation">
+	  <h1 id="widget_header">List of widgets</h1>
+
+	  <ul id="widget_list">
+	  </ul>
+        </div>
+          
+        <div id="content">
+            <p>Below you can preview widgets using two test users, Alice and Bob. 
+            Just click an icon or name of a widget displayed in the panel on the left
+            of the page to display an instance of that widget for each of the users.
+            </p>
+            <p>
+            If the widget supports it, Alice has been given extra privilages 
+            (i.e. she can set the questions in a vote). 
+            </p>
+            <p>A well implemented widget has 
+            sensible fallback behaviour for unknown users. This page allows you to both 
+            see the widgets in operation and, during development, you can test them here too.
+            </p>
+            <p>Remember, not all widgets are designed to be multi-user and thus you may not 
+            see any interaction between the two widget instances.
+            </p>
+            <!-- Preview area -->
+            <hr/>
+            <h3>Previewing: <span id="preview_info">None</span></h3>
+            <div id="preview">
+                <h3>Requested Size</h3>
+                <div id="preview_alice" class="preview">
+                    <h1><img src="alice.png"/> Alice</h1>
+                    <div id="preview_alice_widget">Select a widget on the left</div>
+            <span id="alice_url">&nbsp;</span>
+                </div>
+                <div id="preview_bob" class="preview">
+                    <h1><img src="bob.png"> Bob</h1>
+                    <div id="preview_bob_widget">Select a widget on the left</div>
+            <span id="bob_url">&nbsp;</span>
+                </div>
+            </div>
+            <hr/>               
+            <div id="tilePreview">
+              <h3>Tiled version</h3>
+                <div id="tile_preview_alice" class="preview">
+                    <div id="preview_alice_tile">Select a widget on the left</div>
+                </div>
+                <div id="tile_preview_bob" class="preview">
+                    <div id="preview_bob_tile">Select a widget on the left</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="footer">
+            <div class="copyright">
+              <p>
+                Copyright &copy; 2011-2012 The Apache Software Foundation, Licensed under
+                the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+                <br>
+                Apache and the Apache feather logos are trademarks of The Apache Software Foundation.
+              </p>
+            </div>
+        </div>
+        
+	</body>
+</html> 

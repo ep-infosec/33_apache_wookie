@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
+	<display-name>Wookie Widget Server</display-name>
+	
+	<listener>
+		<listener-class>
+			org.apache.wookie.server.ContextListener
+		</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>
+			org.directwebremoting.servlet.EfficientShutdownServletContextAttributeListener
+		</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>
+			org.directwebremoting.servlet.EfficientShutdownServletContextListener
+		</listener-class>
+	</listener>
+	
+	<filter>
+		<filter-name>MainFilter</filter-name>
+		<filter-class>
+			org.apache.wookie.server.MainFilter
+		</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>MainFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+  	
+  	<filter>
+    	<filter-name>Localized Resource Filter</filter-name>
+    	<filter-class>org.apache.wookie.server.LocalizedResourceFilter</filter-class>
+  	</filter>
+  	<filter-mapping>
+    	<filter-name>Localized Resource Filter</filter-name>
+    	<url-pattern>/deploy/*</url-pattern>
+  	</filter-mapping>
+		
+	<servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>
+			org.directwebremoting.servlet.DwrServlet
+		</servlet-class>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>activeReverseAjaxEnabled</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		
+		<init-param>
+       		<param-name>org.directwebremoting.extend.PageNormalizer</param-name>
+       		<param-value>org.apache.wookie.util.SiblingPageNormalizer</param-value>
+  		</init-param>
+		<init-param>
+  			<param-name>org.directwebremoting.extend.ServerLoadMonitor</param-name>
+  			<param-value>org.directwebremoting.impl.PollingServerLoadMonitor</param-value>
+		</init-param>		
+		<init-param>
+			<param-name>
+				initApplicationScopeCreatorsAtStartup
+			</param-name>
+			<param-value>true</param-value>
+		</init-param> 
+			
+		<init-param>
+			<param-name>maxWaitAfterWrite</param-name>
+			<param-value>500</param-value>
+		</init-param>
+		
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<!-- REST API -->
+	<servlet>
+		<description></description>
+		<display-name>Participants</display-name>
+		<servlet-name>ParticipantServlet</servlet-name>
+		<servlet-class>
+			org.apache.wookie.controller.ParticipantsController
+		</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>ParticipantServlet</servlet-name>
+		<url-pattern>/participants</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>Updates</display-name>
+		<servlet-name>UpdatesServlet</servlet-name>
+		<servlet-class>
+			org.apache.wookie.updates.UpdatesController
+		</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>UpdatesServlet</servlet-name>
+		<url-pattern>/updates/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>Properties</display-name>
+		<servlet-name>PropertiesServlet</servlet-name>
+		<servlet-class>
+			org.apache.wookie.controller.PropertiesController
+		</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>PropertiesServlet</servlet-name>
+		<url-pattern>/properties</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>WidgetInstances</display-name>
+		<servlet-name>WidgetInstancesServlet</servlet-name>
+		<servlet-class>
+			org.apache.wookie.controller.WidgetInstancesController
+		</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>WidgetInstancesServlet</servlet-name>
+		<url-pattern>/widgetinstances/*</url-pattern>
+	</servlet-mapping>	
+	
+	<servlet>
+		<description></description>
+		<display-name>Widget</display-name>
+		<servlet-name>WidgetServlet</servlet-name>
+		<servlet-class>
+			org.apache.wookie.controller.WidgetsController
+		</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>WidgetServlet</servlet-name>
+		<url-pattern>/widgets/*</url-pattern>
+	</servlet-mapping>	
+	
+	<servlet>
+		<description></description>
+		<display-name>Widget Validator</display-name>
+		<servlet-name>ValidatorController</servlet-name>
+		<servlet-class>org.apache.wookie.controller.ValidatorController</servlet-class>
+		<load-on-startup>2</load-on-startup>
+		</servlet>
+	<servlet-mapping>
+		<servlet-name>ValidatorController</servlet-name>
+		<url-pattern>/validate/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>ProxyServlet</display-name>
+		<servlet-name>ProxyServlet</servlet-name>
+		<servlet-class>
+			org.apache.wookie.proxy.ProxyServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProxyServlet</servlet-name>
+		<url-pattern>/proxy/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>PoliciesServlet</display-name>
+		<servlet-name>PoliciesServlet</servlet-name>
+		<servlet-class>
+			org.apache.wookie.controller.PoliciesController
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PoliciesServlet</servlet-name>
+		<url-pattern>/policies/*</url-pattern>
+	</servlet-mapping>
+
+
+	
+	<!-- AJAX -->
+	<servlet>
+		<description>Preferences AJAX controller</description>
+		<display-name>PreferencesController</display-name>
+		<servlet-name>PreferencesController</servlet-name>
+		<servlet-class>org.apache.wookie.controller.PreferencesController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PreferencesController</servlet-name>
+		<url-pattern>/preferences</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>Security Tokens AJAX controller</description>
+		<display-name>SecurityTokenController</display-name>
+		<servlet-name>SecurityTokenController</servlet-name>
+		<servlet-class>org.apache.wookie.controller.SecurityTokenController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SecurityTokenController</servlet-name>
+		<url-pattern>/token</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>Metadata AJAX controller</description>
+		<display-name>MetadataController</display-name>
+		<servlet-name>MetadataController</servlet-name>
+		<servlet-class>org.apache.wookie.controller.MetadataController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MetadataController</servlet-name>
+		<url-pattern>/metadata</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- End AJAX -->
+
+	<!-- oAuth -->
+	<servlet>
+		<description>
+		</description>
+		<display-name>TokenHandler</display-name>
+		<servlet-name>TokenHandler</servlet-name>
+		<servlet-class>org.apache.wookie.feature.oauth.TokenHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TokenHandler</servlet-name>
+		<url-pattern>/features/oauth/implicit</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TokenHandler</servlet-name>
+		<url-pattern>/features/oauth/authz-code</url-pattern>
+	</servlet-mapping>
+	<!-- End oAuth -->
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!--****************** SECURITY SECTION ************************-->
+
+	<!-- Use Authorization Filter for Widget AJAX API  -->
+	<filter>
+   	    <filter-name>WidgetAuthorizationFilter</filter-name>
+   	    <filter-class>org.apache.wookie.server.security.WidgetAuthorizationFilter</filter-class>
+  	</filter>
+  	<filter-mapping>
+    	<filter-name>WidgetAuthorizationFilter</filter-name>
+		<servlet-name>PreferencesController</servlet-name>
+  	</filter-mapping>
+  	<filter-mapping>
+    	<filter-name>WidgetAuthorizationFilter</filter-name>
+		<servlet-name>MetadataController</servlet-name>
+  	</filter-mapping>
+  	  <filter-mapping>
+    	<filter-name>WidgetAuthorizationFilter</filter-name>
+		<servlet-name>SecurityTokenController</servlet-name>
+  	</filter-mapping>
+  			
+	<!-- Use Authorization Filter for REST API  -->
+	<filter>
+   	    <filter-name>AuthorizationFilter</filter-name>
+   	    <filter-class>org.apache.wookie.server.security.AuthorizationFilter</filter-class>
+   	    <init-param>
+   	    	<param-name>authorization-scheme</param-name>
+   	    	<param-value>HMAC</param-value>
+   	    	<description>Use HMAC for authenticating API calls</description>
+   	    </init-param>
+  	</filter>
+  	<filter-mapping>
+    	<filter-name>AuthorizationFilter</filter-name>
+		<servlet-name>WidgetInstancesServlet</servlet-name>
+  	</filter-mapping>
+  	<filter-mapping>
+    	<filter-name>AuthorizationFilter</filter-name>
+		<servlet-name>PropertiesServlet</servlet-name>
+  	</filter-mapping>
+  	<filter-mapping>
+    	<filter-name>AuthorizationFilter</filter-name>
+ 		<servlet-name>ParticipantServlet</servlet-name>
+  	</filter-mapping>
+    <filter-mapping>
+    	<filter-name>AuthorizationFilter</filter-name>
+		<servlet-name>PoliciesServlet</servlet-name>
+  	</filter-mapping>	
+  	 <filter-mapping>
+    	<filter-name>AuthorizationFilter</filter-name>
+		<servlet-name>UpdatesServlet</servlet-name>
+  	</filter-mapping>	
+  	<filter-mapping>
+    	<filter-name>AuthorizationFilter</filter-name>
+		<servlet-name>WidgetServlet</servlet-name>
+  	</filter-mapping>			
+		
+		<error-page>
+  			<error-code>401</error-code>
+  			<location>/error/notauthorized.jsp</location>
+ 		</error-page>		
+</web-app>

@@ -1,0 +1,102 @@
+<%
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ %>
+ /**
+ * Summary information for a results browser
+ */
+
+.detail {
+  clear:both;
+  width: 100%;
+  margin-bottom: 0.6em; 
+}
+
+.thumbnail {
+  float:left;
+  width: 16%;
+}
+
+.meta-data {
+	margin-left: 0.6em;
+	float: left;
+	width: 80%;
+}
+
+.uploader {
+  clear: left;
+  float: left;
+  text-align: left;
+  width: 75%;
+  font-size: 90%;
+}
+
+.rating {
+  float: right;
+  text-align: right;
+  font-size: 80%;
+  width: 25%;
+}
+
+.type {
+  clear: left;
+  float: left;
+  text-align: left;
+  width: 70%;
+}
+
+.license {
+  float: left;
+  text-align: right;
+  width: 30%;
+  font-size: 80%;
+}
+ 
+.description {
+  float:left;
+  width: 100%;
+  font-size: 95%;
+  margin-top: 0.6em;
+}
+
+.update {
+  clear: left;
+  float:left;
+  font-size: 75%;
+  text-align: center;
+}
+
+/*.summary {
+  clear: both;
+}*/
+
+.location {
+  font-size: 80%;
+  float: right;
+}
+
+.clear {
+  clear:both;
+}
+
+.header {
+/* note removed div from markup to get JQM styling */
+  background: white;
+  color: black;
+  text-shadow: none;
+  border: none;
+}

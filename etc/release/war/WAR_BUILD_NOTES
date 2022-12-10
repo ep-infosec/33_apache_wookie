@@ -1,0 +1,124 @@
+Apache Wookie  - WAR distribution instructions
+==============================================
+This folder should contain...
+
+wookie.xml
+wookie.war
+scripts
+NOTICE
+README
+LICENSE
+RELEASE_NOTES
+NEW_AND_NOTEWORTHY
+UPGRADING
+WAR_BUILD_NOTES (this file!)
+
+This build is meant to get a user started with the process of deploying
+Wookie under an existing application container and as such Wookie is made available in
+WAR format. This particular download is oriented towards deploying Wookie under a Tomcat
+instance running with Mysql.  Deploying against other containers and database environments
+should be also possible by following the instructions below.
+
+Generic instructions for deployment
+===================================
+In order to deploy Wookie onto your application server, you must...
+
+(1) Install a suitable database driver for Wookie on your server (if you haven't already)
+(2) Create a user with the group/rolename as "widgetadmin" on your server installation
+	-  and give this user the credentials username=java password=java
+(3) Create a database called 'widgetdb' in your database
+(4) Create a user 'java' in your database and give this user suitable 
+	permissions on the above database	
+(5) Run one of the sql scripts found under the scripts folder to create the Wookie database structure
+(6) Create/configure a context.xml file under your server for Wookie
+(7) Copy the wookie.war to your webapps or deploy directory
+(8) Start your server
+(9) Open your browser and goto 'http://YOURSERVERADDRESS:8080/wookie' (i.e. http://localhost:8080/wookie)
+
+The following text describes this process specifically for Tomcat and Mysql...
+
+
+Running Wookie with Tomcat and MySQL manual configuration
+=========================================================
+
+(1) Obtain a JDBC driver jar file for the database.
+	(for example the mysql driver can be downloaded from 
+	http://www.mysql.com/downloads/connector/j/)
+	The downloaded zip file should contain a jar file, something similar to 
+	mysql-connector-java-5.1.*-bin.jar
+	
+(2) Place the mysql-connector-java-5.1.*-bin.jar file into tomcats lib folder 
+	so it is founnd on the classpath at runtime
+	(for example in tomcat 5.5.* place this file into /tomcat-root/common/lib)
+	(for example in tomcat 6.0.* place this file into /tomcat-root/lib)
+
+(3) You will need to create a user with the role "widgetadmin" in your tomcat installation. 
+	For example, add the following line to the file /tomcat-root/conf/tomcat-users.xml:
+
+	<role rolename="widgetadmin"/><user username="java" password="java" roles="widgetadmin"/>
+
+    In this example, we are assuming the password 'java', but we encourage
+	you to choose a more secure password. The password you choose here will 
+	need to be the same as in step (5) and (6).
+	
+(4) Create a database in mysql called 'widgetdb'. 
+
+	mysql> CREATE DATABASE IF NOT EXISTS widgetdb;
+
+(5) Create a user in mysql 'java' and give them suitable permisions 
+	on the widgetdb. Give this user the same password as you have chosen
+	in step (3).
+	
+	mysql> CREATE USER 'java'@'localhost' IDENTIFIED BY 'java';
+	mysql> GRANT ALL ON widgetdb.* TO 'java'@'localhost';
+
+(6) Copy the file wookie.xml to your tomcat-root/conf/catalina/servername folder	
+	(for example in tomcat 5.5.* & 6.0.* place this file into /tomcat-root/conf/Catalina/localhost)
+	
+	NOTE: If you have set up a password for the db user 'java' which is not 
+	'java' in step (3) you will have to edit this file to update to the correct 
+	password.
+
+(7) Locate the 'mysql-wookie-schema.sql' file found under 'scripts' and run this to populate the 
+	'widgetdb' database you created
+	- NOTE: the first time you run this script, you may have to remove the drop foreign key statements 
+	found at the top of the script
+	
+	shell>  mysql widgetdb < mysql5-wookie-schema.sql -p
+	
+	i.e. the statements that look similar to these..
+	
+	ALTER TABLE tablename
+    DROP FOREIGN KEY FKWidgetTablename;
+	
+	... as the first time they won't exist.
+	
+(8) Copy the 'wookie.war' file to your deployment folder '/tomcat-root/webapps'
+
+(9) Start your server
+
+(10) Open your browser and goto 'http://YOURSERVERADDRESS:8080/wookie' (i.e. http://localhost:8080/wookie)
+
+Running Wookie with Websphere Application Server 7
+==================================================
+
+WAS 7 comes pre-installed with a number of important dependencies used by Wookie, so in order to get
+Wookie working correctly you need to change the class loader of the Wookie WAR to PARENT_LAST and remove
+the following jars from WEB-INF/lib:
+
+- openjpa-all
+- xml-apis
+
+You may also need to comment out the following line from persistence.properties:
+
+openjpa.Log=log4j
+
+This file can be found in WEB-INF/classes/org/apache/wookie/beans/jpa
+
+Depending on the database used, there may also be issues with case-sensitivity of table names; see issue 
+WOOKIE-419 for more information.
+
+If you have any problems issues deploying Wookie on Websphere, there is a ticket on our tracker for
+any related issues: 
+
+https://issues.apache.org/jira/browse/WOOKIE-417

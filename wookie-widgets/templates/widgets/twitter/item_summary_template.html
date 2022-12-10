@@ -1,0 +1,38 @@
+<%
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the 'License'); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an 'AS IS' BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+%>
+
+<!--
+
+The template used for item summaries, representing a single record but before
+the item detail has been retrieved. We override this to provide all the info in the summary
+and not the detail template - this is because the Twitter API is rate limited, and we can
+populate the whole thing directly in one call.
+
+Note the OnClick event handler that triggers a search for the user by their screen_name. This
+is missing quotes as these are added at some point in the processing of the parameter - if you
+include a quote or an escape character then between Ant and JQuery something will go wrong :(
+Still, it works as is)
+
+-->
+
+<li class='tweet result' wid='${ID}'>
+  <a href='#' onclick=${widget.shortname}_browse_controller.search('${SCREEN_NAME}')><img class='tweet_avatar' alt='Avatar for ${SCREEN_NAME}; click to read more tweets from this user' title='See more tweets from ${SCREEN_NAME}'  src='${PROFILE_IMAGE_URL}'></a>
+  <span class='tweet_text'>${TEXT}</span>
+  <br clear='left'>
+  <abbr class='timeago' title='${CREATED_AT}'>${CREATED_AT}</abbr> 
+  <div class='detail'></div>
+</li>
